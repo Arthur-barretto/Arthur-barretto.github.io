@@ -2645,6 +2645,28 @@ input, select, textarea {
 			.image.main img {
 				width: 100%;
 			}
+		.image.proj {
+			display: block;
+			margin: 4rem 0;
+		}
+	
+			.image.proj:first-child {
+				margin-top: 0;
+			}
+	
+			.image.proj img {
+				width: 50%;
+				margin-left: auto;
+				margin-right: auto;
+				}
+		.image.profile {
+			border-radius: 50%
+		} 
+		
+		.image.cover {
+			border-radius: 50%
+		} 
+				
 
 		@media screen and (max-width: 736px) {
 
