@@ -2662,7 +2662,7 @@ input, select, textarea {
 		.image.profile {
 			border-radius: 50%
 		} 
-		
+
 		.image.cover {
 			border-radius: 50%
 		} 
@@ -3966,6 +3966,30 @@ input, select, textarea {
 			}
 
 		}
+		
+	.line {
+		margin:5px 0;
+		height:1px;
+		background:
+		repeating-linear-gradient(90deg,black 0 15px,#0000 0 30px)
+		/*3px red then 4px transparent -> repeat this!*/
+	}
+	
+	.line1 {
+		margin:5px 0;
+		height:1px;
+		background:
+		repeating-linear-gradient(90deg,black 0 15px,#0000 0 30px)
+		/*3px red then 4px transparent -> repeat this!*/
+	}
+	
+	.line2 {
+		margin:5px 0;
+		height:2px;
+		background:
+		repeating-linear-gradient(90deg,black 0 10px,#0000 0 12px)
+		/*10px red then 2px transparent -> repeat this!*/
+	}
 
 /* Footer */
 
@@ -4707,5 +4731,5 @@ input, select, textarea {
 			box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.2);
 			visibility: visible;
 		}
-
+	
 	}
