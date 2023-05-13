@@ -46,8 +46,322 @@
 									risk prone students and classrooms</p><br>
 									<span style="line-height:10px" class="date">Check <a href="https://github.com/Arthur-barretto/StudentFailure">code </a>or <a href="https://github.com/Arthur-barretto/StudentFailure/blob/main/Dissertation.pdf">thesis </a></span>
 								</header>
-								<div class="image main"><img src="images/iaa-formatura-tcc.PNG" width = 200 alt="" /></div>
-								<p>Brazil has historically struggled with respect to economic productivity and inequality. By looking at recent indicators one can come to the conclusion that both remain pressing problems to solve. In terms of economic development, superior education plays a key role. Public policy of the last couple of decades has aimed improving superior education through increasing investments, however the main obstacle has been the correct allocation of those investments. The project documented on this paper aims to aid the guidance of future policies through the creation of a model that can predict student performance as to assertively and reliably predict which students will pass or fail in the subjects they enroll as a tool for a better teaching management. Using machine learning methods, two prediction models have been developed, where one is a random forest model, and another is a logistic regression model. Both algorithms’ inner mechanisms differ in such a way that permitted a discussion of the characteristics important for each pointing to possible performance diagnosis hypotheses that could be explored in future investigations. Two main objectives guided the development and adjustment of both models: the identification of critical cases and the mapping of all student failures. In both cases the random forest model has shown better results, higher precision, and specificity. With 86% precision, the model demonstrated itself capable of predicting critical cases, as for the identification of all failures it has indicated sensitivity of 79% and 36% false positive rate, concluding that it may be useful for general application, but not reliable for specific cases. Therefore, the toolset produced and presented in the present paper generates reliable results and constitute an advancement in the capacity of academic performance interpretation as well as an example for other similar demands not yet attended in other universities and schools in the Brazilian educational landscape.</p>
+								<div class="image main"><img src="images/Pjt-Student-Failure--ROC-AUC random forest2.png" width = 200 alt="" /></div>
+									<h3>Introduction</h3>
+								<p>This thesis was the last of a series of projects aimed at improving the teaching and learning experience at the engineering center of the Federal University of Santa Catarina (UFSC). There weren’t many initiatives working with students’ datasets so there was a lot of room for improvement in terms of management procedures and this series was an attempt to light a spark of change. In this specific dissertation the objective was to build a model to predict which students would fail the subjects they were enrolled in so that the management team could act and efficiently allocate resources to prevent the worst outcomes.</p>
+									<h3>Data</h3>
+								<p>The dataset had student data from 13 courses in the engineering center in the period of 2000-2018. It comprised the socioeconomic profile and their grade history from entry exams until every subject they took to date. There were about 23.000 students over around 25.000 enrollments since students sometimes transferred to other courses within the center or re-enrolled at the same course to renew their GPAs. It summed up to about 1.3 million data points of subjects taken by students.</p>
+									<h3>Exploratory Data Analysis</h3>
+								<p>The student grades revealed an overall approval rate of 76% and a 6,21 over 10 overall GPA. The overall GPA of all students had been decreasing over time as we can see in the time-series graph and has dropped about 11% over the time analysed time span.</p>
+								<div class="image proj"><img src="images/Pjt-Student-Failure--media historica.png" alt="" /></div>
+								<p>The student GPA histogram shows that performance varied greatly. Out of the students in the dataset 22% were still enrolled, 48% were graduated and 30% left without a diploma. Students that graduated differed greatly from students who didn’t graduate. That can be assessed by their differently distributed GPA histograms or the GPA boxplot of each group.</p>
+									<div class="row">
+										<div class="col-6 col-12-small">
+											<div class="image.left"><img src="images/Pjt-Student-Failure--histograma IAA geral.png" width = 450 alt="" /></div>
+											<div class="image.left"><img src="images/Pjt-Student-Failure--histograma IAA formados.png" width = 450 alt="" /></div>
+										</div>
+										<div class="col-6 col-12-small">
+											<div class="image.right"><img src="images/Pjt-Student-Failure--boxplot IAA formatura.png" width = 480 alt="" /></div>
+											<div class="image.right"><img src="images/Pjt-Student-Failure--histograma IAA desistentes.png" width = 500 alt="" /></div>
+										</div>
+									</div>
+								<p>Regarding possible explanations of different performance in terms of approval rate and GPA, a couple of features stood out: quotas, ethnicity, the discipline’s and teacher’s approval rate, how many subjects a student is enrolled in and if it was the first time the student was taking the subject. Student who got into university by quota had lower performance and took longer to get a diploma. The current fraction of abandonment over graduated students jumped from 46% to 68%.</p>
+								<div class="image.fit"><img src="images/Pjt-Student-Failure--tabela cotas.png" width = 1000  alt="" /></div>
+								<div class="image proj"><img src="images/Pjt-Student-Failure--grafico cotas.png" alt="" /></div>
+								<p>Ethnicity also played a role, but since the quota is also divided by ethnicity, once we isolate the ethnicity concerning quotas, the effect diminishes. It’s also important to notice that 90% of black students got in via quota and that group is by far the one with the highest dropout rate and lowest graduation rate of only 10% to date.</p>
+								<div class="image.fit"><img src="images/Pjt-Student-Failure--tabela cota etnia2.png" width = 1000 alt="" /></div>
+								<p>Most subjects had a very high approval rate, but a few of them very low, especially for early ones such as calculus. Teachers had a distribution that resembled the subject distribution except that it was a little less symmetrical and the teacher’s relevance was particularly enhanced when concerning a discipline with low approval rate.</p>
+									<div class="row">
+										<div class="col-6 col-12-small">
+											<div class="image.left"><img src="images/Pjt-Student-Failure--histograma aprov disciplina.png" width=450 alt="" /></div>
+											<div class="image.left"><img src="images/Pjt-Student-Failure--histograma aprov prof.png" width=450 alt="" /></div>
+										</div>
+										<div class="col-6 col-12-small">
+											<div class="image.right"><img src="images/Pjt-Student-Failure--histograma nota disciplina.png" width=450 alt="" /></div>
+											<div class="image.right"><img src="images/Pjt-Student-Failure--histograma nota prof.png" width=450 alt="" /></div>
+										</div>
+									</div>
+								<p>The approval rate of students taking the subject for the first time was significantly higher than the group of students taking a subject for the second time. In fact, that represented a drop of 48%. That only got worse for groups of students who took it 3, 4 or 5 times. That was a consistent effect showing that students who fail a subject often repeat the feat, eventually turning into the dropout student’s profile.</p>
+									<div class="row">
+										<div class="col-6 col-12-small">
+											<div class="image.left"><img src="images/Pjt-Student-Failure--tabela vez disciplina.png" width = 600 alt="" /></div>
+										</div>
+										<div class="col-6 col-12-small">
+											<div class="image.right"><img src="images/Pjt-Student-Failure--grafico vez disciplina.png" width = 600 alt="" /></div>
+										</div>
+									</div>
+								<p>The last meaningful takeaway was that students taking more subjects usually showed a higher approval rate. That is somewhat a countersense but it two explanations might be that they are more commited to the university and specific hard subjects students fail have a lower effect over their approval rate.</p>
+									<div class="row">
+										<div class="col-6 col-12-small">
+											<div class="image.left"><img src="images/Pjt-Student-Failure--tabela cont disciplinas.png" width = 500 alt="" /></div>
+										</div>
+										<div class="col-6 col-12-small">
+											<div class="image.right"><img src="images/Pjt-Student-Failure--grafico cont disciplinas.png" width = 600 alt="" /></div>
+										</div>
+									</div>
+									<h3>Model</h3>
+								<p>As mentioned in the introduction, the model was meant to be a tool for management. Consequently it was elaborated with two use cases in mind: mapping all student failures to identify vulnerable spots such as classrooms and teachers; identifying worst cases where focused actions could be taken. Two models were developed for each case: logistic regression and random forest. However different, all of the models were trained to transform the student subjects enrollment input into a prediction whether he would pass each one.</p>
+								<p>As for the feature engineering, many different forms of student performance were included such as their approval rates and GPAs one, three, all past semesters and the GPA delta from the previous 2 semesters. The characteristics displayed in the exploratory analysis also became features.</p>
+								<p>The models were tuned testing different hyperparameters via Random and GridSearch. With the most adequate hyperparameters there’s still a decision in terms of the chosen threshold, at what probability should a data point be classified as a failure and since it depends on every use case, the paper outlined the relevant indicators as well as a general suggestion for each model. The table below explicits the precision, specificity, F1-score and precision at K, all relevant to figure out the best model.</p>
+								<div class="image proj"><img src="images/limiar de decisao.png" alt="" /></div>
+								<p>The suggested threshold for each model, the indicators and the resulting confusion matrix are shown below.</p>
+									<h4>Random Forest</h4>
+								<div class="image proj"><img src="images/Pjt-Student-Failure--ROC-AUC random forest2.png" width = 200 alt="" /></div>
+
+									<div class="row">
+										<div class="col-6 col-12-small">
+
+										<table class = table>
+										<tr>
+											<th>Thres
+											hold</th>										
+											<th>Classif.</th>
+											<th>Precision</th>
+											<th>Specificity</th>
+											<th>F1-Score</th>
+											<th>P@K</th>
+										</tr>
+										<tr>
+											<td rowspan=3 style="vertical-align : middle;text-align:center;">0.7</td>
+									        <td>Failed</td>
+											<td>0.86</td>
+											<td>0.37</td>
+											<td>0.52</td>
+											<td rowspan=3 style="vertical-align : middle;text-align:center;">0.87</td>
+										</tr>
+										<tr>
+        									<td>Passed</td>
+											<td>0.84</td>
+											<td>0.98</td>
+											<td>0.91</td>
+										<tr>
+        									<td>Weighted Average</td>
+											<td>0.85</td>
+											<td>0.84</td>
+											<td>0.82</td>
+										</tr>
+										</table>
+										</div>
+
+										<div class="col-6 col-12-small">
+										<table>
+										<tr>
+											<th>Confusion Matrix</th>										
+											<th>Predicted Negative</th>
+											<th>Predicted Positive</th>
+										</tr>
+										<tr>
+									        <th scope="row">True Negative</th>
+											<td>19.989</td>
+											<td>355</td>
+										</tr>
+										<tr>
+        									<th scope="row">True Positive</th>
+											<td>3.756</td>
+											<td>2.215</td>
+										</tr>
+										</table>
+
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-6 col-12-small">
+										<table class = table>
+										<tr>
+											<th>Thres
+											hold</th>										
+											<th>Classif.</th>
+											<th>Precision</th>
+											<th>Specificity</th>
+											<th>F1-Score</th>
+											<th>P@K</th>
+										</tr>
+										<tr>
+											<td rowspan=3 style="vertical-align : middle;text-align:center;">0.5</td>
+									        <td>Failed</td>
+											<td>0.74</td>
+											<td>0.61</td>
+											<td>0.67</td>
+											<td rowspan=3 style="vertical-align : middle;text-align:center;">0.67</td>
+										</tr>
+										<tr>
+        									<td>Passed</td>
+											<td>0.89</td>
+											<td>0.94</td>
+											<td>0.91</td>
+										<tr>
+        									<td>Weighted Average</td>
+											<td>0.86</td>
+											<td>0.86</td>
+											<td>0.86</td>
+										</tr>
+										</table>
+
+										</div>
+
+										<div class="col-6 col-12-small">
+										<table>
+										<tr>
+											<th>Confusion Matrix</th>										
+											<th>Predicted Negative</th>
+											<th>Predicted Positive</th>
+										</tr>
+										<tr>
+									        <th scope="row">True Negative</th>
+											<td>17.269</td>
+											<td>2.696</td>
+										</tr>
+										<tr>
+        									<th scope="row">True Positive</th>
+											<td>1.274</td>
+											<td>4.697</td>
+										</tr>
+										</table>
+
+										</div>
+									</div>
+									<h4>Logistic Regression</h4>
+								<div class="image proj"><img src="images/Pjt-Student-Failure--ROC-AUC log reg2.png" width = 200 alt="" /></div>
+
+									<div class="row">
+										<div class="col-6 col-12-small">
+
+										<table class = table>
+										<tr>
+											<th>Thres
+											hold</th>										
+											<th>Classif.</th>
+											<th>Precision</th>
+											<th>Specificity</th>
+											<th>F1-Score</th>
+											<th>P@K</th>
+										</tr>
+										<tr>
+											<td rowspan=3 style="vertical-align : middle;text-align:center;">0.7</td>
+									        <td>Failed</td>
+											<td>0.80</td>
+											<td>0.33</td>
+											<td>0.47</td>
+											<td rowspan=3 style="vertical-align : middle;text-align:center;">0.8</td>
+										</tr>
+										<tr>
+        									<td>Passed</td>
+											<td>0.83</td>
+											<td>0.98</td>
+											<td>0.90</td>
+										<tr>
+        									<td>Weighted Average</td>
+											<td>0.83</td>
+											<td>0.83</td>
+											<td>0.8</td>
+										</tr>
+										</table>
+										</div>
+
+										<div class="col-6 col-12-small">
+										<table>
+										<tr>
+											<th>Confusion Matrix</th>										
+											<th>Predicted Negative</th>
+											<th>Predicted Positive</th>
+										</tr>
+										<tr>
+									        <th scope="row">True Negative</th>
+											<td>19.985</td>
+											<td>492</td>
+										</tr>
+										<tr>
+        									<th scope="row">True Positive</th>
+											<td>3.999</td>
+											<td>1.972</td>
+										</tr>
+										</table>
+
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-6 col-12-small">
+										<table class = table>
+										<tr>
+											<th>Thres
+											hold</th>										
+											<th>Classif.</th>
+											<th>Precision</th>
+											<th>Specificity</th>
+											<th>F1-Score</th>
+											<th>P@K</th>
+										</tr>
+										<tr>
+											<td rowspan=3 style="vertical-align : middle;text-align:center;">0.5</td>
+									        <td>Failed</td>
+											<td>0.75</td>
+											<td>0.49</td>
+											<td>0.60</td>
+											<td rowspan=3 style="vertical-align : middle;text-align:center;">0.67</td>
+										</tr>
+										<tr>
+        									<td>Passed</td>
+											<td>0.86</td>
+											<td>0.95</td>
+											<td>0.91</td>
+										<tr>
+        									<td>Weighted Average</td>
+											<td>0.84</td>
+											<td>0.85</td>
+											<td>0.84</td>
+										</tr>
+										</table>
+
+										</div>
+
+										<div class="col-6 col-12-small">
+										<table>
+										<tr>
+											<th>Confusion Matrix</th>										
+											<th>Predicted Negative</th>
+											<th>Predicted Positive</th>
+										</tr>
+										<tr>
+									        <th scope="row">True Negative</th>
+											<td>19.375</td>
+											<td>969</td>
+										</tr>
+										<tr>
+        									<th scope="row">True Positive</th>
+											<td>3.030</td>
+											<td>2.941</td>
+										</tr>
+										</table>
+
+										</div>
+									</div>
+									
+								<p>Random Forest</p>
+								<ul>
+									<li>Model 1: 86% sensitivity.</li>
+									<li>Model 2: 79% specificity at 36% false positive rate.</li>
+								</ul>
+								<p>Logistic Regression</p>
+								<ul>
+									<li>Model 1: 80% Sensitivity</li>
+									<li>Model 2: 49% specificity at 25% false positive rate.</li>
+								</ul>
+								<p>For the application of identifying worst cases, even though random forest model has slightly better results, the difference of model performance should indicate on using the logistic regression model. Regarding the second use case, the results using the random forest model are a lot better which means it should be the best choice.</p>
+									<h3>ML Approach</h3>
+								<p>The models for prediction have used the training data to learn underlying patters that help explain what is really happening in the natural phenomenon. The feature importance tool displays part of what the model learned and the intensity to each feature’s effect. Using this tool combined with the correlation between features can therefore lead to interesting conclusions and the development of new hypotheses surrounding what makes a student fail. It is however important to take into account that feature importance in each model has different interpretations.</p>
+								<div class="image.fit"><img src="images/Pjt-Student-Failure--mapa correlacao.png" width=1100 alt="" /></div>
+									<div class="row">
+										<div class="col-6 col-12-xlarge">
+											<div class="image.left"><img src="images/Pjt-Student-Failure--Feature importance - random forest.png" width = 500 alt="" /></div>
+										</div>
+										<div class="col-6 col-12-xlarge">
+											<div class="image.right"><img src="images/Pjt-Student-Failure--Feature importance - logistic regression.png" width = 500 alt="" /></div>
+										</div>
+									</div>
+								<p>The main features are in both models, the last semester’s GPA, the discipline’s approval rate and the turn taking the subject. An important takeaway is that categories like quota and ethnic group looked important in the exploratory analysis, but don’t seem to interfere much with the predictions. A possible explanation would be the entrance exam dispersion already covers their effect. Also, student GPA seems like a better metric than student’s approval rate. Considering it represents more of a continuum instead of a discretionary value, it might contain more information available for the model.</p>
+								<p>There were many different hypotheses drawn from these results and it should lay ground for next steps on interpreting student failures as well as a tool for efficiently managing the system.</p>
 							</section>
 
 					</div>
