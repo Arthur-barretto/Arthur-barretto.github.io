@@ -84,19 +84,19 @@
 								<p>The approval rate of students taking the subject for the first time was significantly higher than the group of students taking a subject for the second time. In fact, that represented a drop of 48%. That only got worse for groups of students who took it 3, 4 or 5 times. That was a consistent effect showing that students who fail a subject often repeat the feat, eventually turning into the dropout student’s profile.</p>
 									<div class="row">
 										<div class="col-6 col-12-small">
-											<div class="image.left"><img src="images/Pjt-Student-Failure--tabela vez disciplina.png" width = 600 alt="" /></div>
+											<div class="image.left"><img src="images/Pjt-Student-Failure--tabela vez disciplina.png" width = 450 alt="" /></div>
 										</div>
 										<div class="col-6 col-12-small">
-											<div class="image.right"><img src="images/Pjt-Student-Failure--grafico vez disciplina.png" width = 600 alt="" /></div>
+											<div class="image.right"><img src="images/Pjt-Student-Failure--grafico vez disciplina.png" width = 450 alt="" /></div>
 										</div>
 									</div>
 								<p>The last meaningful takeaway was that students taking more subjects usually showed a higher approval rate. That is somewhat a countersense but it two explanations might be that they are more commited to the university and specific hard subjects students fail have a lower effect over their approval rate.</p>
 									<div class="row">
 										<div class="col-6 col-12-small">
-											<div class="image.left"><img src="images/Pjt-Student-Failure--tabela cont disciplinas.png" width = 500 alt="" /></div>
+											<div class="image.left"><img src="images/Pjt-Student-Failure--tabela cont disciplinas.png" width = 450 alt="" /></div>
 										</div>
 										<div class="col-6 col-12-small">
-											<div class="image.right"><img src="images/Pjt-Student-Failure--grafico cont disciplinas.png" width = 600 alt="" /></div>
+											<div class="image.right"><img src="images/Pjt-Student-Failure--grafico cont disciplinas.png" width = 450 alt="" /></div>
 										</div>
 									</div>
 									<h3>Model</h3>
@@ -351,13 +351,13 @@
 								<p>For the application of identifying worst cases, even though random forest model has slightly better results, the difference of model performance should indicate on using the logistic regression model. Regarding the second use case, the results using the random forest model are a lot better which means it should be the best choice.</p>
 									<h3>ML Approach</h3>
 								<p>The models for prediction have used the training data to learn underlying patters that help explain what is really happening in the natural phenomenon. The feature importance tool displays part of what the model learned and the intensity to each feature’s effect. Using this tool combined with the correlation between features can therefore lead to interesting conclusions and the development of new hypotheses surrounding what makes a student fail. It is however important to take into account that feature importance in each model has different interpretations.</p>
-								<div class="image.fit"><img src="images/Pjt-Student-Failure--mapa correlacao.png" width=1100 alt="" /></div>
+								<div class="image.fit"><img src="images/Pjt-Student-Failure--mapa correlacao.png" width=800 alt="" /></div>
 									<div class="row">
 										<div class="col-6 col-12-xlarge">
-											<div class="image.left"><img src="images/Pjt-Student-Failure--Feature importance - random forest.png" width = 500 alt="" /></div>
+											<div class="image.left"><img src="images/Pjt-Student-Failure--Feature importance - random forest.png" width = 450 alt="" /></div>
 										</div>
 										<div class="col-6 col-12-xlarge">
-											<div class="image.right"><img src="images/Pjt-Student-Failure--Feature importance - logistic regression.png" width = 500 alt="" /></div>
+											<div class="image.right"><img src="images/Pjt-Student-Failure--Feature importance - logistic regression.png" width = 450 alt="" /></div>
 										</div>
 									</div>
 								<p>The main features are in both models, the last semester’s GPA, the discipline’s approval rate and the turn taking the subject. An important takeaway is that categories like quota and ethnic group looked important in the exploratory analysis, but don’t seem to interfere much with the predictions. A possible explanation would be the entrance exam dispersion already covers their effect. Also, student GPA seems like a better metric than student’s approval rate. Considering it represents more of a continuum instead of a discretionary value, it might contain more information available for the model.</p>
