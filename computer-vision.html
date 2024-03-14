@@ -25,7 +25,6 @@
 							<li><a href="index.html">Main Page</a></li>
 							<li class="active"><a href="computer-vision.html">Penguin Search</a></li>
 							<li><a href="student-failure.html">Student failure</a></li>
-							<li><a href="calculus-reform.html">Calculus reform</a></li>
 							<li><a href="contact.html">contact</a></li>
 						</ul>
 						<ul class="icons">
@@ -53,7 +52,7 @@
 								<p>The application is an interface that can be used to identify and locate penguins in any given image. There’s some research that uses that sort of information to analyse the behaviour of a herd not only to assess their health as a group but also as an indicator of how global warming is affecting areas subjected to change in coming years. Therefore this is a first step that can lead to many different uses and applications.</p>
 								<div class="image main"><img src="images/streamlit-1.PNG" alt="" /></div>
 									<h3>Dataset</h3>
-								<p>The data used came from a 2016’s Oxford’s <a href = https://www.robots.ox.ac.uk/~vgg/data/penguins> dataset</a> called “Penguin Dataset”. It comprised about 80.000 images taken from cameras placed in several spots in Antarctica with intense flow of penguins or next to their nests. Along with the image set there was another file containing dot annotations from volunteers indicating where the penguins were in each image. There were many images without annotations and a single image might have up to 20 different volunteers marking the spots.</p>
+								<p>The data used came from a 2016 Oxford’s <a href = https://www.robots.ox.ac.uk/~vgg/data/penguins> dataset</a> called “Penguin Dataset”. It comprised about 80.000 images taken from cameras placed in several spots in Antarctica with intense flow of penguins or next to their nests. Along with the image set there was another file containing dot annotations from volunteers indicating where the penguins were in each image. There were many images without annotations and a single image might have up to 20 different volunteers marking the spots.</p>
 								<div class="image main"><img src="images/overviewDots.jpg" alt="" /></div>
 									<h3>Bounding Boxes</h3>
 								<p>In order to train a supervised model there needs to be an identification of the bounding boxes surrounding the penguins on the training set. Since the dataset provided the dot annotations, the first approach was to use a 30 pixel squared offset from a single volunteer, the one with the most annotations in an image. There are various simplifications implicit in this method since you’re losing the information contained in all the other annotations and the same offset is a bad approximation since the images contain penguins in all sizes, shapes and distances in the images. In this <a href = https://link.springer.com/chapter/10.1007/978-3-319-46478-7_30> paper </a> some techniques are explored to deal with these problems such as identifying parts of the images that represent the background or foreground, mapping penguin density and annotation densities. All of these are used to map and annotate bounding boxes that better represent the penguins’ locations.</p>
